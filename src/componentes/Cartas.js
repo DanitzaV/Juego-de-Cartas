@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import data from "/src/data/datos.json";
 import "./Cartas.css";
 class Cartas extends Component {
   constructor() {
     super();
     this.state = {
-      cartas1: [1, 2, 3, 4, 5, 6],
-      cartas2: [6, 5, 2, 3, 1, 4],
+      cartas1: data.data1,
+      cartas2: data.data2,
       carta1: 0,
       carta2: 0
     };
+
     this.sort1 = this.sort1.bind(this);
     this.sort2 = this.sort2.bind(this);
-    this.mostrar = this.mostrar.bind(this);
   }
   componentWillMount() {
     this.sort1(this.state.cartas1);
@@ -32,17 +33,11 @@ class Cartas extends Component {
     }
     return a;
   }
-  mostrar(e, o) {
-    console.log(e);
-  }
-  handleClick(e) {
-    this.setState();
-    alert(e);
-  }
   nuevo() {
     if (this.state.carta1 && this.state.carta2 !== 0) {
       if (this.state.carta1 === this.state.carta2) {
         alert("son iguales");
+
         this.setState({ carta1: 0, carta2: 0 });
       } else {
         alert("son diferntes");
@@ -56,16 +51,33 @@ class Cartas extends Component {
       <div>
         <ul>
           {this.state.cartas1.map(e => (
-            <li value={e.toString()} key={e.toString()}>
-              <button onClick={() => this.setState({ carta1: e })}>{e}</button>
+            <li className="list" key={e.id.toString()}>
+              <button
+                className="btnCarta"
+                onClick={() => {
+                  this.setState({ carta1: e.id });
+                }}
+              >
+                <img
+                  id={e.id.toString()}
+                  width="50"
+                  className="cartas2"
+                  src={e.img}
+                />
+              </button>
             </li>
           ))}
         </ul>
 
         <ul>
           {this.state.cartas2.map(j => (
-            <li key={j.toString()}>
-              <button onClick={() => this.setState({ carta2: j })}>{j}</button>
+            <li className="list" key={j.id.toString()}>
+              <button
+                className="btnCarta"
+                onClick={() => this.setState({ carta2: j.id })}
+              >
+                <img width="50" src={j.img} />
+              </button>
             </li>
           ))}
         </ul>
