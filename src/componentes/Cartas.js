@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import data from "/src/data/datos.json";
+import { Grid } from "@material-ui/core";
 import "./Cartas.css";
 class Cartas extends Component {
   constructor() {
@@ -49,38 +50,33 @@ class Cartas extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <Grid item>
           {this.state.cartas1.map(e => (
-            <li className="list" key={e.id.toString()}>
-              <button
-                className="btnCarta"
-                onClick={() => {
-                  this.setState({ carta1: e.id });
-                }}
-              >
-                <img
-                  id={e.id.toString()}
-                  width="50"
-                  className="cartas2"
-                  src={e.img}
-                />
-              </button>
-            </li>
+            <button
+              key={e.id.toString()}
+              className="btnCarta"
+              onClick={() => {
+                this.setState({ carta1: e.id });
+              }}
+            >
+              <img
+                id={e.id.toString()}
+                width="50"
+                className="cartas2"
+                src={e.img}
+              />
+            </button>
           ))}
-        </ul>
-
-        <ul>
           {this.state.cartas2.map(j => (
-            <li className="list" key={j.id.toString()}>
-              <button
-                className="btnCarta"
-                onClick={() => this.setState({ carta2: j.id })}
-              >
-                <img width="50" src={j.img} />
-              </button>
-            </li>
+            <button
+              key={j.id.toString()}
+              className="btnCarta"
+              onClick={() => this.setState({ carta2: j.id })}
+            >
+              <img width="50" src={j.img} />
+            </button>
           ))}
-        </ul>
+        </Grid>
         {this.nuevo()}
       </div>
     );
