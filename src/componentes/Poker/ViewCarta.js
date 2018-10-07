@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import data from "/src/data/datos.json";
-import { Grid } from "@material-ui/core";
 import "./Cartas.css";
+import Carta from "./Cartas";
+import { Grid } from "@material-ui/core";
+import data from "/src/data/datos.json";
 class Cartas extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       cartas1: data.data1,
       cartas2: data.data2,
@@ -13,10 +14,8 @@ class Cartas extends Component {
       value: null,
       mostrar: false
     };
-
     this.sort1 = this.sort1.bind(this);
     this.sort2 = this.sort2.bind(this);
-    this.handleclick = this.handleclick.bind(this);
   }
   componentWillMount() {
     this.sort1(this.state.cartas1);
@@ -37,9 +36,6 @@ class Cartas extends Component {
     }
     return a;
   }
-  handleclick(e) {
-    console.log(e);
-  }
   nuevo() {
     if (this.state.carta1 && this.state.carta2 !== 0) {
       if (this.state.carta1 === this.state.carta2) {
@@ -52,39 +48,27 @@ class Cartas extends Component {
       }
     }
   }
-
+  handleclick(e) {
+    console.log(e);
+  }
   render() {
     return (
-      <div>
+      <Grid container justify="center">
         <Grid item>
           {this.state.cartas1.map(e => (
-            <button
+            <Carta
               key={e.id.toString()}
-              className="btnCarta"
-              onClick={() => {
-                this.setState({ carta1: e.id, mostrar: true });
-              }}
-            >
-              <img
-                id={e.id.toString()}
-                width="50"
-                className="cartas2"
-                src={e.img}
-              />
-            </button>
+              id={e.id}
+              img={e.img}
+              alerta={this.handleclick}
+            />
           ))}
           {this.state.cartas2.map(j => (
-            <button
-              key={j.id.toString()}
-              className="btnCarta"
-              onClick={() => this.setState({ carta2: j.id })}
-            >
-              <img width="50" src={j.img} />
-            </button>
+            <Carta key={j.id.toString()} id={j.id} img={j.img} />
           ))}
         </Grid>
         {this.nuevo()}
-      </div>
+      </Grid>
     );
   }
 }

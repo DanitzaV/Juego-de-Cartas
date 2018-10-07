@@ -7,6 +7,7 @@ import {
 import App from "./App";
 import Cartas from "./componentes/Cartas";
 import ViewCartas from "./componentes/ViewCartas";
+import View from "./componentes/Poker/ViewCarta";
 export default class Router extends Component {
   constructor() {
     super();
@@ -15,7 +16,8 @@ export default class Router extends Component {
     return (
       <ReactRouter>
         <App>
-          <Route path="/" component={ViewCartas} />
+          <Route path="/" component={View} />
+          <Route path="/carta" component={ViewCartas} />
         </App>
       </ReactRouter>
     );
