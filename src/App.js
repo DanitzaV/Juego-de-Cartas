@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div >
         {this.props.children}
-        <Move/>
+        {/* <Move/> */}
       </div>
     );
   }

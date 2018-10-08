@@ -8,7 +8,7 @@ import shuffle from 'lodash.shuffle';
 let  datos = [];
 let mas = [];
 let iguales;
-
+let puntos = 0;
 class Tablero extends Component{
     constructor(){
         super();
@@ -30,23 +30,28 @@ class Tablero extends Component{
     
     handle(e,i){
         mas.push({e,i})
-        document.getElementById(this.props.i).style.display = 'none'; 
-    if( mas.length > 1 && mas.length == 2){
+        mas.map(e =>document.getElementById(e.i).style.display = 'none' )
+  
        
+    if( mas.length > 1 && mas.length == 2){
+     
         console.log('aui')
         
         if(mas[0].e === mas[1].e){
-            
+            puntos++
             console.log('iguales')
         mas = []
         }else {
-            // setTimeout(() => {
-            //     mas = []
-            // },1000)
-            
-            mas.map(e => document.getElementById(e.i).style.display = 'block'  )
-            document.getElementById(mas[0].i).style.display = 'block'
-            document.getElementById(mas[1].i).style.display = 'block'
+           
+            setTimeout(() => {
+                mas.map(e =>
+                    {
+                        document.getElementById(e.i).style.display = 'block'
+                        mas = [];
+                    }  )
+               },1000)
+           
+          
             console.log('ups')
            
         }
@@ -55,7 +60,11 @@ class Tablero extends Component{
     }else{
         console.log('no')
     }
-    console.log(mas)
+    if(puntos == 6) {
+        alert('felicidades ganaste')
+    }
+       console.log(mas)
+    console.log(puntos)
 }
 
    
