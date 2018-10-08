@@ -15,7 +15,6 @@ class Cartase extends Component {
         this.mos = this.props.mos
 
     }
-
     numero(e, i) {
         this.be(e, i);
     }
