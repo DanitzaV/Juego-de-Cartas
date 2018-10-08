@@ -3,6 +3,7 @@ import './Cartas.css';
 import Carta from './Cartae';
 import data from './../../data/data.json';
 import shuffle from 'lodash.shuffle';
+import {Grid,Hidden} from '@material-ui/core';
 
 
 let datos = [];
@@ -58,6 +59,14 @@ class Tablero extends Component {
             setTimeout(() => {
                 alert('felicidades ganaste')
             },400) 
+            setTimeout(() => {
+               
+                if(window.confirm('quieres jugar de nuevo?')){
+                   window.location = 'index.html'
+                }
+            },1000) 
+           
+            
            
         }
         console.log(mas)
@@ -70,14 +79,43 @@ class Tablero extends Component {
 
 
         return (
-            <div className="contenedor">
+            <Grid container justify={"center"} style={{padding: '2px',height: '100vh'}} >
+               <Hidden only={['lg','md','sm','xl']}>
+               <div className="contenidoxs">
                 {
 
-                    this.state.data[0].map((cartas, index) => <Carta key={index} mos={mas} show={this.state.mostrar} id={cartas.id} i={index.toString()} img={cartas.img} be={this.handle} > </Carta>)
+                    this.state.data[0].map((cartas, index) => {
+                        return(
+                            <Grid item xs={4} className="cont">
+                            <Carta key={index} mos={mas} show={this.state.mostrar} id={cartas.id} i={index.toString()} img={cartas.img} be={this.handle} > </Carta>
+                            </Grid>
+                        )
+                    } )
 
                 }
 
             </div>
+               </Hidden>
+               <Hidden only={['xs']}>
+               <div className="contenedor">
+                {
+
+                    this.state.data[0].map((cartas, index) => {
+                        return(
+                            <Grid item sm={4} md={3} >
+                            <Carta key={index} mos={mas} show={this.state.mostrar} id={cartas.id} i={index.toString()} img={cartas.img} be={this.handle} > </Carta>
+                            </Grid>
+                        )
+                    } )
+
+                }
+
+            </div>
+
+               </Hidden>
+               
+            </Grid>
+            
         )
     }
 }
