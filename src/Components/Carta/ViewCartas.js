@@ -48,7 +48,7 @@ class Tablero extends Component {
                       mas = []; 
 
                     })
-                },300)  
+                },200)  
                 console.log('ups')
             }
 
